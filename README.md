@@ -10,7 +10,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   bio:
-    github: [your-github-name]/bio
+    github: mooreryan/bio
 ```
 
 

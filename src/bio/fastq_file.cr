@@ -16,10 +16,32 @@
 # You should have received a copy of the GNU General Public License
 # along with BioCrystal.  If not, see <http://www.gnu.org/licenses/>.
 
-require "./spec_helper"
+module Bio
+  class FastqFile < File
+    def each_record(*args)
+      count = 0
+      header = ""
+      sequence = ""
+      description = ""
+      quality = ""
 
-Spec2.describe "Bio" do
-  it "has a version number" do
-    expect(Bio::VERSION).not_to be nil
+      each_line(*args) do |line|
+        line = line.chomp
+
+        case count % 4
+        when 0
+          header = line[1..-1]
+        when 1
+          sequence = line
+        when 2
+          description = line[1..-1]
+        when 3
+          quality = line
+          yield(header, sequence, description, quality)
+        end
+
+        count += 1
+      end
+    end
   end
 end

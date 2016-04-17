@@ -18,8 +18,27 @@
 
 require "./spec_helper"
 
-Spec2.describe "Bio" do
-  it "has a version number" do
-    expect(Bio::VERSION).not_to be nil
+Spec2.describe Bio::FastqFile do
+  describe "::open" do
+    it "returns a Bio::FastqFile" do
+      expect(Bio::FastqFile.open SpecHelper::TEST_FASTQ).
+        to be_a Bio::FastqFile
+    end
+  end
+
+  describe "#each_record" do
+    context "block given" do
+      it "yields head, seq, desc and qual for records" do
+        fq_file = Bio::FastqFile.open SpecHelper::TEST_FASTQ
+
+        records = Array(Array(String)).new
+
+        fq_file.each_record do |head, seq, desc, qual|
+          records << [head, seq, desc, qual]
+        end
+
+        expect(records).to eq SpecHelper::FASTQ_RECORDS
+      end
+    end
   end
 end
