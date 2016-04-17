@@ -23,8 +23,29 @@ module SpecHelper
   TEST_FILE_DIR = File.join File.dirname(__FILE__), "test_files"
 
   TEST_FASTQ = File.join TEST_FILE_DIR, "test.fq"
+  TEST_FASTA = File.join TEST_FILE_DIR, "test.fa"
 
   FASTQ_RECORDS = [["seq1", "AA CC TT GG", "", ")# 3g Tq N8"],
                    ["seq2 apples", "ACTG", "seq2 apples", "*ujM"]]
+
+  FASTA_HEADERS = [" empty seq at beginning",
+                   "seq1 is fun",
+                   "seq2",
+                   " empty seq 1",
+                   " empty seq 2",
+                   "seq3",
+                   "seq 4 > has many '>' in header",
+                   "empty seq at end",]
+
+  FASTA_SEQS    = ["",
+                   "AAC TGG NN N",
+                   "AATCCTGNNN",
+                   "",
+                   "",
+                   "yyyyyyyyyyyyyyyNNN",
+                   "ACTGactg",
+                   "",]
+
+  FASTA_RECORDS = [FASTA_HEADERS, FASTA_SEQS]
 
 end
