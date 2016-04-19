@@ -40,6 +40,7 @@ module Bio
           quality = line
           yield(header, sequence, description, quality)
         end
+      count += 1
       end
     end
   end
