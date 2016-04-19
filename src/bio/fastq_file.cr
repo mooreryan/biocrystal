@@ -28,7 +28,7 @@ module Bio
       each_line(*args) do |line|
         line = line.chomp
 
-        case count % 4
+        case count
         when 0
           header = line[1..-1]
         when 1
@@ -36,11 +36,10 @@ module Bio
         when 2
           description = line[1..-1]
         when 3
+          count = 0
           quality = line
           yield(header, sequence, description, quality)
         end
-
-        count += 1
       end
     end
   end
